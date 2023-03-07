@@ -41,7 +41,14 @@ function App() {
             <h1>Active Task</h1>
           </div>
           <div className="right">
-            <i className="fas fa-times"></i>
+          <i id={obj.id} className="fas fa-times" onClick={(e)=>{
+              let index= toDos.findIndex(obj=>{return obj.id==e.target.id})
+              if (index !== -1) {
+                toDos.splice(index, 1);
+                setTodos([...toDos]);
+              }
+            }}>
+</i>
           </div>
         </div>)
          })}
