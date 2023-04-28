@@ -4,20 +4,29 @@ import { useState } from 'react';
 function App() {
   const [toDos,setTodos] = useState([])
   const [toDo,setToDo]=useState('')
+  const d=new Date()
+  const day=d.getDay()
+  let weekdays=['Sunday','Monday','Tuesday',"Webnesday","Thursday",'Friday','Saturday']
   return (
+    
     <div className="app">
       <div className="mainHeading">
         <h1>ToDo List</h1>
       </div>
       <div className="subHeading">
         <br />
-        <h2>Whoop, it's Wednesday 🌝 ☕ </h2>
+        <h2>Whoop, it's {weekdays[day]} 🌝 ☕ </h2>
       </div>
       <div className="input">
         <input value={toDo} onChange={(e)=>setToDo(e.target.value)} type="text" placeholder="🖊️ Add item..." />
-        <i onClick={()=>setTodos([...toDos,{ id:Date.now() ,text: toDo,status:false}])} className="fas fa-plus"></i>
+        <i onClick={()=>
+        {  if(toDo==""){
+            alert('enter some text')
+          }else{
+          setTodos([...toDos,{ id:Date.now() ,text: toDo,status:false}])}}} className="fas fa-plus"></i>
       </div>
       <div className="todos">
+      
         {
           toDos.map((obj)=>{
 
@@ -39,7 +48,7 @@ function App() {
               type="checkbox" name="" id="" />
             <p>{obj.text}</p>
             <h1>Active Task</h1>
-          </div>
+          </div> 
           <div className="right">
           <i id={obj.id} className="fas fa-times" onClick={(e)=>{
               let index= toDos.findIndex(obj=>{return obj.id==e.target.id})
@@ -49,6 +58,7 @@ function App() {
               }
             }}>
 </i>
+
           </div>
         </div>)
          })}
